@@ -30,6 +30,7 @@ console.log(heading2);
 const nuevoEnlace = document.createElement("A");
 
 // TODO: ** Agregando propiedades **
+
 /** Agregar el href */
 nuevoEnlace.href = "nuevo-enlace.html";
 
@@ -46,6 +47,7 @@ navegacion.appendChild(nuevoEnlace);
 console.log(nuevoEnlace);
 
 // TODO: Eventos
+
 // console.log(1);
 
 // window.addEventListener("load", function () {
@@ -70,6 +72,7 @@ console.log(nuevoEnlace);
 // };
 
 // TODO: Seleccionar elementos y asociarles un evento
+
 // const btnEnviar = document.querySelector(".boton--primario");
 // btnEnviar.addEventListener("click", function (e) {
 //   /** evento: e, evt, event, no esta bien definido */
@@ -79,6 +82,7 @@ console.log(nuevoEnlace);
 // });
 
 // TODO: Eventos de los Inputs y Textarea
+
 const datos = {
   nombre: "",
   email: "",
@@ -99,34 +103,54 @@ formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
   /** Validar el formulario */
+
   const { nombre, email, mensaje } = datos;
 
   if (nombre === "" || email === "" || mensaje === "") {
-    mostrarAlerta("Todos los campos son obligatoriossss", true);
+    mostrarAlerta("Todos los campos son obligatoriossss",true);
 
     return; /** Corta la ejecución del codigo */
   }
 
   /** Crea alerta de envio exitoso */
-  mostrarAlerta("Mensaje enviado correctamenteeee");
+  mostrarAlerta("Mensaje enviado correctamente");
 });
 
 function leerTexto(e) {
+  //console.log(e.target.value);
+  /** para que se muestren lo que se escribe, siempre debe llevar e.target.value */
+
   datos[e.target.id] = e.target.value;
+    //  /** Tecnica para llenar los formularios, deben ser los mismo nombres las llaves del objeto con los Inputs*/
+
+ /** console.log(e.target);  Contiene el Input sobre el cual escribimos */
+
+  // console.log(datos);
 }
 
 // TODO: Refactorizar el codigo
 function mostrarAlerta(mensaje, error = null) {
-  const alerta = document.createElement("P");
-  alerta.textContent = mensaje;
+  const alerta = document.createElement("P"); /** Se crea el elemento */
+  alerta.textContent = mensaje; /** Se mapea el mensaje de la validación */
+}
 
-  if (error) {
-    alerta.classList.add("error"); /** se agrega clase CSS */
-  } else {
-    alerta.classList.add("correcto"); /** se agrega clase CSS */
-  }
+// TODO: Muestra una alerta de que se envio correctamente
+function mostrarMensaje(mensaje) {
+  alerta.classList.add("correcto"); /** se agrega clase CSS */
 
   formulario.appendChild(alerta);
+
+  // TODO: Que desaparezca despues de 5 segundos
+  setTimeout(() => {
+    alerta.remove();
+  }, 5000);
+}
+
+// TODO: Muestra un error en pantalla
+function mostrarError(mensaje) {
+  error.classList.add("error"); /** Se agrega clase CSS */
+
+  formulario.appendChild(error);
 
   /** Desaparecera despues de 5 segundos */
   setTimeout(() => {
